@@ -32,13 +32,9 @@ const personRoutes = require('./routes/personRoutes')
 app.use('/person', personRoutes)
 
 // ENTREGAR UMA PORTA
-//user_api
-//cqTUtDnI6DIM1d7T
-//mongodb+srv://${DB_USER}:${DB_PASS}@apicluster.0ct18pr.mongodb.net/apidb?retryWrites=true&w=majority
-
 mongoose
   .connect(
-    'mongodb+srv://user_api:cqTUtDnI6DIM1d7T@apicluster.0ct18pr.mongodb.net/apidb?retryWrites=true&w=majority',
+    `mongodb+srv://${DB_USER}:${DB_PASS}@apicluster.0ct18pr.mongodb.net/apidb?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
