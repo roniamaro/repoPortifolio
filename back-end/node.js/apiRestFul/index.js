@@ -21,24 +21,17 @@ app.get('/', (req, res) => {
   res.json({ message: 'Express rodando...' })
 })
 
-////////////////////////// entregar uma porta //////////////////////////
-//${DB_USER}:${DB_PASS}
-const DB_USER = process.env.DB_USER
-const DB_PASS = encodeURIComponent(process.env.DB_PASS)
-
-//app.listen(4000) // disponibiliza o express na porta 4000
-
+////////////////////////// rotas da API
 const personRoutes = require('./routes/personRoutes')
 app.use('/person', personRoutes)
 
-// ENTREGAR UMA PORTA
+////////////////////////// entregar uma porta //////////////////////////
+const DB_USER = process.env.DB_USER
+const DB_PASS = encodeURIComponent(process.env.DB_PASS)
+
 mongoose
   .connect(
-    `mongodb+srv://${DB_USER}:${DB_PASS}@apicluster.0ct18pr.mongodb.net/apidb?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
+    `mongodb+srv://${DB_USER}:${DB_PASS}@apicluster.0ct18pr.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => {
     console.log('Conexão com o DB realizada')

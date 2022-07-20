@@ -5,7 +5,7 @@ const Person = require('../models/Person')
 // POST - Creat Person
 router.post('/', async (req, res) => {
   // req.body
-  // {name: "Roni", salary: "100", approved: false}
+  // {name: "Roni", salary: 100, approved: false}
   const { name, salary, approved } = req.body
 
   if (!name) {
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-//GET - Consult Person
+//GET - Consult Persons
 router.get('/', async (req, res) => {
   // read
   try {
@@ -93,13 +93,9 @@ router.patch('/:id', async (req, res) => {
 //DELETE - Delete Person by _id
 router.delete('/:id', async (req, res) => {
   const id = req.params.id
-  const { name, salary, approved } = req.body
-  const person = {
-    name,
-    salary,
-    approved
-  }
-
+  
+  const person = await Person.findOne({ _id: id })
+  
   if (!person) {
     res.status(422).json({ error: 'O Usuário não foi encontrado' })
     return
